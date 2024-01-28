@@ -1,0 +1,85 @@
+<!-- create_pilot_event.html -->
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>{{ user.username }}, create a new Event</h2>
+
+    <hr>
+
+    <form method="post" action="" class="mt-4">
+      {% csrf_token %}
+
+      <!-- Event Name -->
+      <div class="row mb-3">
+        <div class="col-12">
+          <h3>Event Name</h3>
+          <p class="text-secondary">Enter a name for the event</p>
+          <label for="{{ form.event_name.id_for_label }}" class="form-label">Event Name</label>
+
+          {{ form.event_name }}
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Date and Airports -->
+      <div class="row">
+        <div class="col-md-5">
+          <h4>Date</h4>
+          <p class="text-secondary">Enter the start and completion date for the event. Events that are a single day will have the same date for both.</p>
+          <div class="mb-4">
+            <label for="{{ form.event_start_date.id_for_label }}" class="form-label">Start Date</label>
+            {{ form.event_start_date }}
+          </div>
+          <div class="mb-4">
+            <label for="{{ form.event_finish_date.id_for_label }}" class="form-label">Finish Date</label>
+            {{ form.event_finish_date }}
+          </div>
+        </div>
+
+        <div class="col-md-7">
+          <h4>Airports</h4>
+          <p class="text-secondary">Enter the airport that the event will be held at.</p>
+          <div class="mb-3">
+            <label for="{{ form.host_airport.id_for_label }}" class="form-label">Host Airport</label>
+            {{ form.host_airport }}
+            <br>
+          </div>
+          <div class="mb-3">
+            <p class="text-secondary">If the event will be at multiple airports, enter other airports (up to 2 additional airports).</p>
+            <label for="{{ form.second_airport.id_for_label }}" class="form-label">Second Airport</label>
+            {{ form.second_airport }}
+          </div>
+          <div class="mb-3">
+            <label for="{{ form.third_airport.id_for_label }}" class="form-label">Third Airport</label>
+            {{ form.third_airport }}
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Event Description -->
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <h4>Event Description</h4>
+          <div class="mb-1">
+            {{ form.event_description }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary mt-1">Submit</button>
+
+    </form>
+  </div>
+
+  {% block extra_styles %}
+    {% load static %}
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="{% static 'connections/custom-styles.css' %}">
+  {% endblock %}
+
+{% endblock %}

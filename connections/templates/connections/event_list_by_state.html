@@ -1,0 +1,52 @@
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 style="color: black;">Event List for {{ user.pilotprofile.home_airport.state }}</h2>
+    <p class="mb-4">Events Listed sorted by start date</p>
+
+
+
+    {% regroup events by event.event_start_date as event_group %}
+
+    {% for group in event_group %}
+      <h3>{{ group.grouper|date:"F d, Y" }}</h3>
+
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Event Name</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">Finish Date</th>
+              <th scope="col">Host Airport</th>
+              <th scope="col">Second Airport</th>
+              <th scope="col">Third Airport</th>
+              <th scope="col">Host Name</th>
+              <th scope="col">Actions</th>
+              <!-- Add more columns as needed -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for event in group.list %}
+              <tr>
+                <td>{{ event.event_name }}</td>
+                <td>{{ event.event_start_date }}</td>
+                <td>{{ event.event_finish_date }}</td>
+                <td>{{ event.host_airport.icao }} / {{ event.host_airport.state }}</td>
+                <td>{{ event.second_airport.icao }} / {{ event.second_airport.state }}</td>
+                <td>{{ event.third_airport.icao }} / {{ event.third_airport.state }}</td>
+                <td>{{ event.host_name }}</td>
+                <td>
+                  <a href="{% url 'view_pilot_event' event_name=event.event_name %}" class="btn btn-primary btn-sm">Details</a>
+                  <a href="{% url 'send_message' recipient_id=event.host_name.id %}" class="btn btn-success btn-sm">Message</a>
+                  <!-- Add more actions as needed -->
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

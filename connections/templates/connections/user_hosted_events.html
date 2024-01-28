@@ -1,0 +1,45 @@
+<!-- user_hosted_events.html -->
+
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 style="color: black;">Events Hosted by {{ user.username }}</h1>
+    <p>Showing events hosted by {{ user.username }}.</p>
+    <table class="table table-striped mt-4">
+      <thead>
+        <tr>
+          <th>Event Name</th>
+          <th>Start Date</th>
+          <th>Finish Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in hosted_events %}
+          <tr>
+            <td>{{ event.event_name }}</td>
+            <td>{{ event.event_start_date|date:"F d, Y" }}</td>
+            <td>{{ event.event_finish_date|date:"F d, Y" }}</td>
+            <td>
+              <a href="{% url 'edit_pilot_event' event.id %}" class="btn btn-primary">Edit</a>
+              <!-- Add confirmation prompt for delete -->
+              <a href="#" class="btn btn-danger" onclick="confirmDelete('{{ event.event_name }}', '{% url 'delete_pilot_event' event.id %}')">Delete</a>
+              <!-- Add more actions as needed -->
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- JavaScript for confirmation prompt -->
+  <script>
+    function confirmDelete(eventName, deleteUrl) {
+      var confirmMessage = "Are you sure you want to delete the event '" + eventName + "'?";
+      if (confirm(confirmMessage)) {
+        window.location.href = deleteUrl;
+      }
+    }
+  </script>
+{% endblock %}

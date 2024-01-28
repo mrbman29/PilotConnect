@@ -1,0 +1,39 @@
+<!-- view_pilot_event.html -->
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Event Name: <strong><span style="color: blue;">{{ pilot_event.event_name }}</span></strong></h2>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Date</h4>
+        <p>Start Date: <span style="color: blue;">{{ pilot_event.event_start_date }}</span></p>
+        <p>Finish Date: <span style="color: blue;">{{ pilot_event.event_finish_date }}</span></p>
+      </div>
+
+      <div class="col-md-8">
+        <h4>Airports</h4>
+        <p>Host Airport: <span style="color: blue;">{{ pilot_event.host_airport }}</span></p>
+        <p>Secondary Airport: <span style="color: blue;">{{ pilot_event.second_airport }}</span></p>
+        <p>Third Airport: <span style="color: blue;">{{ pilot_event.third_airport }}</span></p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Host Name</h4>
+        <p>Host Name: <span style="color: blue;">{{ pilot_event.host_name }}</span></p>
+        <!-- Add "Send Message" button -->
+        <a href="{% url 'send_message' recipient_id=pilot_event.host_name.id %}" class="btn btn-success">Send Message</a>
+      </div>
+      <div class="col-md-8">
+        <h4>Description</h4>
+        <p>Description: <span style="color: blue;">{{ pilot_event.event_description }}</span></p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

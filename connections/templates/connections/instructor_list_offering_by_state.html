@@ -1,0 +1,43 @@
+<!-- instructor_list_offering.html -->
+{% extends 'connections/base.html' %}
+
+{% block title %}List of Instructors Offering Services{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 style="color: black;">Users offering to be an Instructor in  {{ user.pilotprofile.home_airport.state }}</h2>
+    <p>List of all users that are offering to be an Instructor in your state.</p>
+
+    <table class="table table-striped mt-2">
+      <thead>
+        <tr>
+          <th scope="col">User Name</th>
+          <th scope="col">Home Airport</th>
+          <th scope="col">CFI</th>
+          <th scope="col">Instrument CFII</th>
+          <th scope="col">Commercial SEI</th>
+          <th scope="col">Commercial MEI</th>
+          <th scope="col">Actions</th>
+          <!-- Add more columns as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for pilot_profile in object_list %}
+          <tr>
+            <td>{{ pilot_profile.user.username }}</td>
+            <td>{{ pilot_profile.home_airport }}</td>
+            <td class="text-center">{% if pilot_profile.instructor_offer_cfi %}✅{% endif %}</td>
+            <td class="text-center">{% if pilot_profile.instructor_offer_instrument_cfii %}✅{% endif %}</td>
+            <td class="text-center">{% if pilot_profile.instructor_offer_commercial_single_engine %}✅{% endif %}</td>
+            <td class="text-center">{% if pilot_profile.instructor_offer_commercial_multi_engine_mei %}✅{% endif %}</td>
+            <td>
+              <a href="{% url 'view_pilot_profile' user_id=pilot_profile.user.id %}" class="btn btn-primary">Profile</a>
+              <a href="{% url 'send_message' recipient_id=pilot_profile.user.id %}" class="btn btn-success">Message</a>
+            </td>
+            <!-- Add more columns as needed -->
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

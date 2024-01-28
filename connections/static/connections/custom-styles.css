@@ -1,0 +1,21 @@
+
+It looks like there might be a syntax error in your CSS file. The closing curly brace for the .custom-event-name-input class is missing. Additionally, there's a missing closing curly brace for the .form-control-wide class. Here's the corrected version:
+
+css
+Copy code
+/* custom-styles.css */
+
+/* Adjust the width of the Event Name input field */
+.form-control-wide {
+    width: 100%;  /* You can adjust the width as needed */
+}
+
+.custom-event-name-input,
+.custom-event-description-input,
+.custom-content-input {
+    width: 50%;
+}
+
+.custom-subject-input {
+    width: 50%;
+}

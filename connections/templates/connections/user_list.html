@@ -1,0 +1,35 @@
+<!-- users_list.html -->
+
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 style="color: black;">Users List - All Users</h1>
+    <p>Showing all users, sorted by user name.</p>
+    <table class="table table-striped mt-4">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Home Airport</th>
+          <th>Last Login Date</th>
+          <th>Registration Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.pilotprofile.home_airport }}</td>
+            <td>{{ user.last_login|date:"F d, Y" }}</td>
+            <td>{{ user.date_joined|date:"F d, Y" }}</td>
+            <td>
+              <a href="{% url 'view_pilot_profile' user.id %}" class="btn btn-primary">View Profile</a>
+              <a href="{% url 'send_message' user.id %}" class="btn btn-success">Send Message</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

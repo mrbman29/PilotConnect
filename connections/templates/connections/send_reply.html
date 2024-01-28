@@ -1,0 +1,16 @@
+<!-- send_reply.html -->
+
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1>Reply to Message</h1>
+    <p>Replying to a message from {{ original_message.sender.username }}.</p>
+
+    <form method="post" action="{% url 'send_reply' original_message.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-success">Send Reply</button>
+    </form>
+  </div>
+{% endblock %}

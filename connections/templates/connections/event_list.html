@@ -1,0 +1,46 @@
+<!-- event_list.html -->
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Event List - all active events</h2>
+    <p>Showing all active events.</p>
+
+    {% regroup events by event.event_start_date as event_group %}
+
+    {% for group in event_group %}
+      <h3>{{ group.grouper|date:"F d, Y" }}</h3>
+
+      <table class="table table-striped mt-2">
+        <thead>
+          <tr>
+            <th scope="col">Event Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Finish Date</th>
+            <th scope="col">Host Airport</th>
+            <th scope="col">Host Name</th>
+            <th scope="col">Actions</th> <!-- Add a new column for actions -->
+            <!-- Add more columns as needed -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for event in group.list %}
+            <tr>
+              <td>{{ event.event_name }}</td>
+              <td>{{ event.event_start_date }}</td>
+              <td>{{ event.event_finish_date }}</td>
+              <td>{{ event.host_airport }}</td>
+              <td>{{ event.host_name }}</td>
+              <td>
+                <a href="{% url 'view_pilot_event' event_name=event.event_name %}" class="btn btn-primary">Details</a>
+                <!-- Add "Send Message" button -->
+                <a href="{% url 'send_message' recipient_id=event.host_name.id %}" class="btn btn-success">Message</a>
+              </td>
+              <!-- Add more columns as needed -->
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Pilot Connect</title>
+    {% load static %}  <!-- Load static tag at the beginning -->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    <style>
+        /* Add the styles from base.html */
+        body {
+            background-image: url("{% static 'connections/images/welcomepic.jpg' %}");
+            background-size: 100% auto;
+            background-position: top center; /* Adjusted to position at the top */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            color: black; /* Set text color to black */
+            font-family: 'Arial', sans-serif;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: black; /* Set text color to black */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            color: black; /* Set text color to black */
+        }
+
+        li {
+            margin-top: 10px;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn {
+            width: 200%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Pilot Connect – Your Aviation Hub!</h1>
+
+    <ul>
+        <li>✈️ Connect with fellow aviation enthusiasts.</li>
+        <li>👥 Build your aviation tribe with like-minded pilots.</li>
+        <li>🎯 Find personalized connections for safety pilots, instructors, and rentals.</li>
+        <li>🌐 Navigate our user-friendly platform for seamless sky exploration.</li>
+        <li>Ready to take flight? Join Pilot Connect now!</li>
+    </ul>
+
+    <div class="btn-container">
+        <a class="btn btn-primary" href="{% url 'register' %}">Sign Up</a>
+        <a class="btn btn-danger" href="{% url 'login' %}">Login</a>
+    </div>
+</body>
+
+</html>

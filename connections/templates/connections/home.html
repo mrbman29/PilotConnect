@@ -1,0 +1,171 @@
+{% extends 'connections/base.html' %}
+
+{% block title %}Home - Pilot Connect{% endblock %}
+
+{% block content %}
+  <style>
+    /* Add the styles from base.html */
+    body {
+      /* Add any other styles you need for the body */
+      color: black; /* Set text color to black */
+    }
+
+    h1,
+    p,
+    li {
+      /* Add any other styles you need for these elements */
+      color: black; /* Set text color to black */
+    }
+
+    /* Add additional styles for cards if needed */
+    .card {
+      margin-bottom: 20px;
+      width:20rem; /* Adjusted to a wider width */
+    }
+
+    .card-title-bg {
+      background-color: #dcdcdc; /* Use your preferred gray color */
+      padding: 10px;
+      border-bottom: 1px solid #dee2e6; /* Add a border to separate from card body */
+    }
+  </style>
+
+  <div class="container mt-4">
+    <h1 class="mb-4">Welcome aboard, {{ user.username }}!</h1>
+    <p>Welcome to your Pilot Connect Home Page, your connection to the Aviation Community. </p>
+    <br>
+
+
+    <div class="offset-md-1 row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card" style="width: 23rem;">
+          <div class="card-title-bg">
+            <h5 class="card-title">Profile And Connections</h5>
+            <p>Update your profile to connect with other pilots that have the same needs as you. You will be able to locate other Pilots and they can locate you.</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="{% url 'update_pilot_profile' %}">Update Pilot Profile</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card" style="width: 23rem;">
+          <div class="card-title-bg">
+            <h5 class="card-title">Messages</h5>
+            <p>The Message Center is how Pilots connect. Send messages to Pilots and receive message from others. Connect with like minded Aviators.</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="{% url 'view_messages' %}">View Messages</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col">
+        <div class="card" style="width: 23rem;">
+          <div class="card-title-bg">
+            <h5 class="card-title">Users</h5>
+            <p>Find and connect with pilots from all over, or the from your state, even by your home airport.</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="{% url 'user_list' %}">Users List - all users by user name</a></li>
+              <li class="list-group-item"><a href="{% url 'user_list_by_state' %}">Users List - by State</a></li>
+              <li class="list-group-item"><a href="{% url 'users_same_airport' %}">Users List - your airport only</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="col">
+        <div class="card" style="width: 23rem;">
+          <div class="card-title-bg">
+            <h5 class="card-title">Events</h5>
+            <p>Find events to participate in or spread the word about an event you are part of. Events can be anything from group flights, manufacturers demo flights to breakfast with a flying club.</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="{% url 'create_pilot_event' %}">Create a new event</a></li>
+              <li class="list-group-item"><a href="{% url 'event_list' %}">List of All Events</a></li>
+              <li class="list-group-item"><a href="{% url 'event_list_by_state' %}">Events in Your State</a></li>
+              <li class="list-group-item"><a href="{% url 'user_hosted_events' %}">Events Hosted by You</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card" style="width: 23rem;">
+          <div class="card-title-bg">
+            <h5 class="card-title">Safety Pilot</h5>
+            <p>Connect with other pilots either looking for a Safety Pilot, or offering to be a Safety Pilot for others.</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <span>Pilots that need a Safety Pilot</span>
+              <li class="list-group-item"><a href="{% url 'safety_pilot_list' %}">Need Safety Pilot - all users</a></li>
+              <li class="list-group-item"><a href="{% url 'safety_pilot_list_by_state' %}">Need Safety Pilot - your state</a></li>
+              <li class="list-group-item"><a href="{% url 'safety_pilot_list_by_home_airport' %}">Need Safety Pilot - your airport</a></li>
+              <span>Pilots offering to be Safety Pilot</span>
+              <li class="list-group-item"><a href="{% url 'safety_pilot_list_offering' %}">Offering Safety Pilot - all users</a></li>
+              <li class="list-group-item"><a href="{% url 'safety_pilot_list_offering_by_state' %}">Offering Safety Pilot - your state</a></li>
+              <li class="list-group-item"><a href="{% url 'safety_pilot_list_offering_by_airport' %}">Offering Safety Pilot - your airport</a></li>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+          <div class="card" style="width: 23rem;">
+              <div class="card-title-bg">
+                  <h5 class="card-title">Instructor</h5>
+                  <p>Connect with instructors either looking for students or offering to instruct others.</p>
+              </div>
+              <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                      <span>Pilots that need an Instructor</span>
+                      <li class="list-group-item"><a href="{% url 'instructor_list' %}">Need an Instructor - all users</a></li>
+                      <li class="list-group-item"><a href="{% url 'instructor_list_by_state' %}">Need an Instructor - your state</a></li>
+                      <li class="list-group-item"><a href="{% url 'instructor_list_by_home_airport' %}">Need an Instructor - your airport</a></li>
+                      <span>Instructors offering services</span>
+                      <li class="list-group-item"><a href="{% url 'instructor_list_offering' %}" >Offering to be an Instructor - all users</a></li>
+                      <li class="list-group-item"><a href="{% url 'instructor_list_offering_by_state' %}" >Offering to be an Instructor - your state</a></li>
+                      <li class="list-group-item"><a href="{% url 'instructor_list_offering_by_home_airport' %}" >Offering to be an Instructor - your airport</a></li>
+
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+      <!-- Add more cards as needed -->
+
+      <div class="col">
+        <div class="card" style="width: 23rem;">
+          <div class="card-title-bg">
+            <h5 class="card-title">Airports</h5>
+            <p>See the list of available Airports.</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="{% url 'airport_list' %}">Airport List - all airports by ICAO</a></li>
+              <li class="list-group-item"><a href="{% url 'airport_list_by_state' %}">Airport List - your state only {{ user_home_state }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add more cards as needed -->
+      <!-- Add more cards as needed -->
+
+    </div>
+  </div>
+{% endblock %}

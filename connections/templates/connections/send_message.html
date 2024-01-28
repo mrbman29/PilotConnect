@@ -1,0 +1,38 @@
+<!-- send_message.html -->
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 style="color: black; margin-bottom: 20px;">Sending Message to: {{ recipient.username }}</h1>
+    <form method="post" action="{% url 'send_message' recipient.id %}">
+      {% csrf_token %}
+      
+      <div class="form-group">
+        <label for="{{ form.subject.id_for_label }}">Subject</label>
+        {{ form.subject }}
+      </div><br>
+      
+      <div class="form-group">
+        <label for="{{ form.content.id_for_label }}">Content</label>
+        {{ form.content }}
+      </div><br>
+
+      {# If 'recipient' should be readonly, use a hidden input #}
+      {% if form.fields.recipient.widget.is_hidden %}
+        {{ form.recipient }}
+      {% else %}
+        <div class="form-group">
+          <label for="{{ form.recipient.id_for_label }}">Recipient</label>
+          {{ form.recipient }}
+        </div>
+      {% endif %}
+
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </div>
+
+  {% load static %} {# Add this line to load the static tag #}
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" type="text/css" href="{% static 'connections/custom-styles.css' %}">
+{% endblock %}
+

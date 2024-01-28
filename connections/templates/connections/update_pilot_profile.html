@@ -1,0 +1,150 @@
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="offset-md-1">
+      <h2 class="mb-4">{{ user.username }}, please update your profile.</h2>
+      <form method="post">
+
+        {% csrf_token %}
+
+        <!-- Personal Information Section -->
+        <fieldset class="border p-3 mb-4">
+          <legend class="text-primary font-weight-bold">Personal Information</legend>
+          <div class="mb-3">
+            <label for="{{ form.home_airport.id_for_label }}">Home Airport</label>
+            {{ form.home_airport }}
+          </div>
+          <div class="mb-3">
+            <label for="{{ form.flight_hours.id_for_label }}">Flight Hours</label>
+            {{ form.flight_hours }}
+          </div>
+        </fieldset>
+
+        <!-- Certifications Section -->
+        <fieldset class="border p-3 mb-4">
+          <legend class="text-primary font-weight-bold">Certifications</legend>
+
+          <!-- Need Certifications Subgroup -->
+          <fieldset class="border p-3 mb-3">
+            <legend class="text-danger">What certifications do you have?</legend>
+            <div class="mb-3 form-check">
+              {{ form.private_pilot }} <label class="form-check-label" for="{{ form.private_pilot.id_for_label }}">Private Pilot</label>
+            </div>
+            <div class="mb-3 form-check">
+              {{ form.instrument_rating }} <label class="form-check-label" for="{{ form.instrument_rating.id_for_label }}">Instrument Rating</label>
+            </div>
+            <div class="mb-3 form-check">
+              {{ form.commercial_pilot_single_engine }} <label class="form-check-label" for="{{ form.commercial_pilot_single_engine.id_for_label }}">Commercial Pilot (Single Engine)</label>
+            </div>
+          </fieldset>
+
+          <!-- Safety Pilot, Instructor, and Plane Rental -->
+          <div class="row">
+
+            <!-- Safety Pilot Section -->
+            <div class="col-md-4 mb-4">
+              <fieldset class="border p-3">
+                <legend class="text-primary font-weight-bold">Safety Pilot</legend>
+                <!-- Need Safety Pilot Subgroup -->
+                <fieldset class="mb-3">
+                  <legend class="text-danger">Need Safety Pilot</legend>
+                  <div class="mb-3 form-check">
+                    {{ form.safety_pilot_need_vfr_single_engine }} <label class="form-check-label" for="{{ form.safety_pilot_need_vfr_single_engine.id_for_label }}">Need VFR (Single Engine)</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.safety_pilot_need_ifr_single_engine }} <label class="form-check-label" for="{{ form.safety_pilot_need_ifr_single_engine.id_for_label }}">Need IFR (Single Engine)</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.safety_pilot_need_ifr_multi_engine }} <label class="form-check-label" for="{{ form.safety_pilot_need_ifr_multi_engine.id_for_label }}">Need IFR (Multi Engine)</label>
+                  </div>
+                </fieldset>
+                <!-- Offer Safety Pilot Subgroup -->
+                <fieldset class="mb-3">
+                  <legend class="text-danger">Offer Safety Pilot</legend>
+                  <div class="mb-3 form-check">
+                    {{ form.safety_pilot_offer_vfr_single_engine }} <label class="form-check-label" for="{{ form.safety_pilot_offer_vfr_single_engine.id_for_label }}">Offer VFR (Single Engine)</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.safety_pilot_offer_ifr_single_engine }} <label class="form-check-label" for="{{ form.safety_pilot_offer_ifr_single_engine.id_for_label }}">Offer IFR (Single Engine)</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.safety_pilot_offer_ifr_multi_engine }} <label class="form-check-label" for="{{ form.safety_pilot_offer_ifr_multi_engine.id_for_label }}">Offer IFR (Multi Engine)</label>
+                  </div>
+                </fieldset>
+              </fieldset>
+            </div>
+
+            <!-- Instructor Section -->
+            <div class="col-md-4 mb-4">
+              <fieldset class="border p-3">
+                <legend class="text-primary font-weight-bold">Instructor</legend>
+                <!-- Need Instructor Subgroup -->
+                <fieldset class="mb-3">
+                  <legend class="text-danger">Need Instructor</legend>
+                  <div class="mb-3 form-check">
+                    {{ form.instructor_need_cfi }} <label class="form-check-label" for="{{ form.instructor_need_cfi.id_for_label }}">Need CFI</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.instructor_need_instrument_cfii }} <label class="form-check-label" for="{{ form.instructor_need_instrument_cfii.id_for_label }}">Need Instrument CFII</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.instructor_need_commercial_single_engine }} <label class="form-check-label" for="{{ form.instructor_need_commercial_single_engine.id_for_label }}">Need Commercial (Single Engine)</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.instructor_need_commercial_multi_engine_mei }} <label class="form-check-label" for="{{ form.instructor_need_commercial_multi_engine_mei.id_for_label }}">Need Commercial (Multi Engine/MEI)</label>
+                  </div>
+                </fieldset>
+                <!-- Offer Instructor Subgroup -->
+                <fieldset class="mb-3">
+                  <legend class="text-danger">Offer Instructor</legend>
+                  <div class="mb-3 form-check">
+                    {{ form.instructor_offer_cfi }} <label class="form-check-label" for="{{ form.instructor_offer_cfi.id_for_label }}">Offer CFI</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.instructor_offer_instrument_cfii }} <label class="form-check-label" for="{{ form.instructor_offer_instrument_cfii.id_for_label }}">Offer Instrument CFII</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.instructor_offer_commercial_single_engine }} <label class="form-check-label" for="{{ form.instructor_offer_commercial_single_engine.id_for_label }}">Offer Commercial (Single Engine)</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.instructor_offer_commercial_multi_engine_mei }} <label class="form-check-label" for="{{ form.instructor_offer_commercial_multi_engine_mei.id_for_label }}">Offer Commercial (Multi Engine/MEI)</label>
+                  </div>
+                </fieldset>
+              </fieldset>
+            </div>
+
+            <!-- Plane Rental Section -->
+            <div class="col-md-4 mb-4">
+              <fieldset class="border p-3">
+                <legend class="text-primary font-weight-bold">Plane Rental</legend>
+                <!-- Need Plane Rental Subgroup -->
+                <fieldset class="mb-3">
+                  <legend class="text-danger">Need Plane Rental</legend>
+                  <div class="mb-3 form-check">
+                    {{ form.rent_need_single_engine }} <label class="form-check-label" for="{{ form.rent_need_single_engine.id_for_label }}">Need Single Engine Rental</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.rent_need_multi_engine }} <label class="form-check-label" for="{{ form.rent_need_multi_engine.id_for_label }}">Need Multi Engine Rental</label>
+                  </div>
+                </fieldset>
+                <!-- Offer Plane Rental Subgroup -->
+                <fieldset class="mb-3">
+                  <legend class="text-danger">Offer Plane Rental</legend>
+                  <div class="mb-3 form-check">
+                    {{ form.rent_offer_single_engine }} <label class="form-check-label" for="{{ form.rent_offer_single_engine.id_for_label }}">Offer Single Engine Rental</label>
+                  </div>
+                  <div class="mb-3 form-check">
+                    {{ form.rent_offer_multi_engine }} <label class="form-check-label" for="{{ form.rent_offer_multi_engine.id_for_label }}">Offer Multi Engine Rental</label>
+                  </div>
+                </fieldset>
+              </fieldset>
+            </div>
+
+          </div>
+
+          <button class="btn btn-primary" type="submit">Update Profile</button>
+        </form>
+      </div>
+    </div>
+  {% endblock %}

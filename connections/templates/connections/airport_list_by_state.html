@@ -1,0 +1,34 @@
+<!-- connections/templates/connections/airport_list_by_state.html -->
+{% extends 'connections/base.html' %}
+
+{% block title %}Airports in {{ user_home_state }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1 style="color: black;"1>Airports in {{ user_home_state }}</h1>
+        <p>Showing airports in the same state as your home airport, sorted by IACO code.</p>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ICAO Code</th>
+                    <th>Airport</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <!-- Add other table headers as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for airport in airports %}
+                    <tr>
+                        <td>{{ airport.icao }}</td>
+                        <td>{{ airport.airport }}</td>
+                        <td>{{ airport.city }}</td>
+                        <td>{{ airport.state }}</td>
+                        <!-- Add other table cells with airport data -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

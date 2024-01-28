@@ -1,0 +1,228 @@
+<!-- connections/templates/connections/view_pilot_profile.html -->
+
+{% extends 'connections/base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+
+    <div class="offset-md-1">
+      <h2 class="mb-4">{{ user.username }}'s Profile</h2>
+
+
+      <!-- Display additional information about the user -->
+
+      <p>Last Login: {{ user.last_login|date:"F d, Y H:i:s" }}</p>
+      <p>Registration Date: {{ user.date_joined|date:"F d, Y H:i:s" }}</p>
+
+      <!-- Personal Information Section -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="text-primary font-weight-bold">Personal Information</legend>
+        {% if user.pilotprofile.home_airport %}
+          <div class="mb-3">
+            <label for="{{ user.pilotprofile.home_airport.id_for_label }}">Home Airport: {{ user.pilotprofile.home_airport }}</label>
+          </div>
+        {% endif %}
+        {% if user.pilotprofile.flight_hours %}
+          <div class="mb-3">
+            <label for="{{ user.pilotprofile.flight_hours.id_for_label }}">Flight Hours: {{ user.pilotprofile.flight_hours }}</label>
+          </div>
+        {% endif %}
+      </fieldset>
+
+      <!-- Certifications Section -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="text-primary font-weight-bold">Certifications</legend>
+
+        <!-- Need Certifications Subgroup -->
+        <fieldset class="border p-3 mb-3">
+          <legend class="text-danger">What certifications do you have?</legend>
+          {% if user.pilotprofile.private_pilot %}
+            <div class="mb-3 form-check">
+              <input type="checkbox" checked disabled>
+              <label class="form-check-label" for="{{ user.pilotprofile.private_pilot.id_for_label }}">Private Pilot</label>
+            </div>
+          {% endif %}
+          {% if user.pilotprofile.instrument_rating %}
+            <div class="mb-3 form-check">
+              <input type="checkbox" checked disabled>
+              <label class="form-check-label" for="{{ user.pilotprofile.instrument_rating.id_for_label }}">Instrument Rating</label>
+            </div>
+          {% endif %}
+          {% if user.pilotprofile.commercial_pilot_single_engine %}
+            <div class="mb-3 form-check">
+              <input type="checkbox" checked disabled>
+              <label class="form-check-label" for="{{ user.pilotprofile.commercial_pilot_single_engine.id_for_label }}">Commercial Pilot (Single Engine)</label>
+            </div>
+          {% endif %}
+        </fieldset>
+
+        <!-- Safety Pilot, Instructor, and Plane Rental -->
+        <div class="d-flex justify-content-between">
+
+          <!-- Safety Pilot Section -->
+          <fieldset class="border p-3 mb-3">
+            <legend class="text-primary font-weight-bold">Safety Pilot</legend>
+
+            <!-- Need Safety Pilot Subgroup -->
+            <fieldset class="mb-3">
+              <legend class="text-danger">Need Safety Pilot</legend>
+              {% if user.pilotprofile.safety_pilot_need_vfr_single_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.safety_pilot_need_vfr_single_engine.id_for_label }}">Need VFR (Single Engine)</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.safety_pilot_need_ifr_single_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.safety_pilot_need_ifr_single_engine.id_for_label }}">Need IFR (Single Engine)</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.safety_pilot_need_ifr_multi_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.safety_pilot_need_ifr_multi_engine.id_for_label }}">Need IFR (Multi Engine)</label>
+                </div>
+              {% endif %}
+            </fieldset>
+
+            <!-- Offer Safety Pilot Subgroup -->
+            <fieldset class="mb-3">
+              <legend class="text-danger">Offer Safety Pilot</legend>
+              {% if user.pilotprofile.safety_pilot_offer_vfr_single_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.safety_pilot_offer_vfr_single_engine.id_for_label }}">Offer VFR (Single Engine)</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.safety_pilot_offer_ifr_single_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.safety_pilot_offer_ifr_single_engine.id_for_label }}">Offer IFR (Single Engine)</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.safety_pilot_offer_ifr_multi_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.safety_pilot_offer_ifr_multi_engine.id_for_label }}">Offer IFR (Multi Engine)</label>
+                </div>
+              {% endif %}
+            </fieldset>
+          </fieldset>
+
+          <!-- Instructor Section -->
+          <fieldset class="border p-3 mb-3">
+            <legend class="text-primary font-weight-bold">Instructor</legend>
+
+            <!-- Need Instructor Subgroup -->
+            <fieldset class="mb-3">
+              <legend class="text-danger">Need Instructor</legend>
+              {% if user.pilotprofile.instructor_need_cfi %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.instructor_need_cfi.id_for_label }}">Need CFI</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.instructor_need_instrument_cfii %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.instructor_need_instrument_cfii.id_for_label }}">Need Instrument CFII</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.instructor_need_commercial_single_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.instructor_need_commercial_single_engine.id_for_label }}">Need Commercial (Single Engine)</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.instructor_need_commercial_multi_engine_mei %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.instructor_need_commercial_multi_engine_mei.id_for_label }}">Need Commercial (Multi Engine/MEI)</label>
+                </div>
+              {% endif %}
+            </fieldset>
+
+            <!-- Offer Instructor Subgroup -->
+            <fieldset class="mb-3">
+              <legend class="text-danger">Offer Instructor</legend>
+              {% if user.pilotprofile.instructor_offer_cfi %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.instructor_offer_cfi.id_for_label }}">Offer CFI</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.instructor_offer_instrument_cfii %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.instructor_offer_instrument_cfii.id_for_label }}">Offer Instrument CFII</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.instructor_offer_commercial_single_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.instructor_offer_commercial_single_engine.id_for_label }}">Offer Commercial (Single Engine)</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.instructor_offer_commercial_multi_engine_mei %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.instructor_offer_commercial_multi_engine_mei.id_for_label }}">Offer Commercial (Multi Engine/MEI)</label>
+                </div>
+              {% endif %}
+            </fieldset>
+          </fieldset>
+
+          <!-- Plane Rental Section -->
+          <fieldset class="border p-3 mb-3">
+            <legend class="text-primary font-weight-bold">Plane Rental</legend>
+
+            <!-- Need Plane Rental Subgroup -->
+            <fieldset class="mb-3">
+              <legend class="text-danger">Need Plane Rental</legend>
+              {% if user.pilotprofile.rent_need_single_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.rent_need_single_engine.id_for_label }}">Need Single Engine Rental</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.rent_need_multi_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.rent_need_multi_engine.id_for_label }}">Need Multi Engine Rental</label>
+                </div>
+              {% endif %}
+            </fieldset>
+
+            <!-- Offer Plane Rental Subgroup -->
+            <fieldset class="mb-3">
+              <legend class="text-danger">Offer Plane Rental</legend>
+              {% if user.pilotprofile.rent_offer_single_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.rent_offer_single_engine.id_for_label }}">Offer Single Engine Rental</label>
+                </div>
+              {% endif %}
+              {% if user.pilotprofile.rent_offer_multi_engine %}
+                <div class="mb-3 form-check">
+                  <input type="checkbox" checked disabled>
+                  <label class="form-check-label" for="{{ user.pilotprofile.rent_offer_multi_engine.id_for_label }}">Offer Multi Engine Rental</label>
+                </div>
+              {% endif %}
+            </fieldset>
+          </fieldset>
+        </div>
+
+        <!-- Comment Section -->
+        <fieldset class="border p-3 mb-4">
+          <legend class="text-primary font-weight-bold">Comment</legend>
+          {% if user.pilotprofile.comments %}
+            <div class="mb-3">
+              <label for="{{ user.pilotprofile.comments.id_for_label }}">Comments: {{ user.pilotprofile.comments }}</label>
+            </div>
+          {% endif %}
+        </fieldset>
+      </fieldset>
+    </div>
+  </div>
+{% endblock %}
