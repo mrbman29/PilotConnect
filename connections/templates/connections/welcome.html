@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Pilot Connect</title>
-    {% load static %}  <!-- Load static tag at the beginning -->
+    {% load staticfiles %}  <!-- Load static tag at the beginning -->
     {% load bootstrap5 %}
     {% bootstrap_css %}
     <style>
         /* Add the styles from base.html */
         body {
-            background-image: url("{% static 'connections/images/welcomepic.jpg' %}");
+            background-image: url("{% staticfiles 'connections/images/welcomepic.jpg' %}");
             background-size: 100% auto;
             background-position: top center; /* Adjusted to position at the top */
             margin: 0;
