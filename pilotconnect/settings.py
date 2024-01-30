@@ -146,4 +146,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK =   'uni_form'
 
-CSRF_COOKIE_SECURE = True
+
