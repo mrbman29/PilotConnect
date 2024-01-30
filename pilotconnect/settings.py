@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&ir7qfj1x1kt65j9*$$g+65#ccy+pd-@_u3pj%c!w=8)j1r(ez
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['pilotconnect.azurewebsites.net']
 
 
 # Application definition
