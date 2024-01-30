@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -134,12 +135,15 @@ STATICFILES_DIRS = [
     # Add paths to any additional directories for static files.
     # This could include static files from apps or other sources.
     # Example:
-    BASE_DIR / "connections/static",
+    #BASE_DIR / "connections/static",
+    os.path.join(BASE_DIR,"connections/static")
 ]
 
 # Define the root directory where `collectstatic` will gather all static files.
 # This should be a directory that your web server can serve directly.
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
