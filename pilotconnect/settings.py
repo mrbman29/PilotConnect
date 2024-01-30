@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['pilotconnect.azurewebsites.net','*']
 
+CSRF_TRUSTED_ORIGINS = [ 'https://*.azurewebsites.net']
+
 
 # Application definition
 
